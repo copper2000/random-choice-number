@@ -1,0 +1,25 @@
+@page "/random-number"
+
+<h1>Tạo số ngẫu nhiên để chọn bài Pháp cho dễ ạ :D</h1>
+<br/>
+
+<h3>Nhập khoảng số ngẫu nhiên</h3> 
+
+<input @bind="@RandomRange"/>
+<br/><br/>
+
+<button class="btn btn-success" onclick="getRandomNumber(@RandomRange)">Tạo số ngẫu nhiên</button>
+<br/><br/>
+
+<input id="randomNumber" disabled />
+
+@code
+{
+    public int RandomRange { get; set; }
+
+    [JSInvokable]
+    public static Task<int> GenerateRandomInt(int maxValue)
+    {
+        return Task.FromResult(new Random().Next(maxValue));
+    }
+}
